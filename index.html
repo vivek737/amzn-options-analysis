@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>AMZN June 2027 $225 Call — Leverage Asymmetry, Nov 4–5 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0b0f14;
+    --card: #151b24;
+    --card2: #1c2430;
+    --line: #2a3340;
+    --text: #e8eef6;
+    --muted: #9aa7b8;
+    --green: #3dd68c;
+    --red: #ff5c7a;
+    --gold: #f5c14a;
+    --blue: #6cb6ff;
+    --purple: #c5a3ff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px; line-height: 1.45; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 20px 16px 64px; }
+  h1 { font-size: 1.7rem; line-height: 1.2; margin: 12px 0 10px; letter-spacing: -0.02em; }
+  h2 { font-size: 1.28rem; margin: 28px 0 10px; }
+  h3 { font-size: 1.05rem; margin: 18px 0 8px; color: var(--gold); }
+  p { color: var(--text); }
+  .muted { color: var(--muted); }
+  .kicker { color: var(--gold); font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; font-size: 0.78rem; margin-bottom: 6px; }
+  .lede { font-size: 1.12rem; color: #d5deea; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+  @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } h1 { font-size: 1.42rem; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+  .card.up { border-top: 4px solid var(--green); }
+  .card.down { border-top: 4px solid var(--red); }
+  .card .day { font-weight: 700; font-size: 1.05rem; }
+  .stat { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.03em; margin: 6px 0 2px; }
+  .stat.up { color: var(--green); }
+  .stat.down { color: var(--red); }
+  .statrow { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0;
+    border-top: 1px solid var(--line); font-size: 0.95rem; }
+  .tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: #2a2110; color: var(--gold); }
+  .tag.obs { background: #14301f; color: var(--green); }
+  .tag.mod { background: #2a2110; color: var(--gold); }
+  .callout { background: linear-gradient(180deg, #1a2230, #151b24); border: 1px solid #3a4a62;
+    border-radius: 16px; padding: 18px; margin: 16px 0; }
+  .callout.math { border-color: #4a3a16; }
+  .chartbox { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 12px 10px 8px; margin: 12px 0 16px; }
+  .chartbox h3 { margin: 4px 10px 0; }
+  .chartbox .caption { color: var(--muted); font-size: 0.88rem; margin: 0 10px 8px; }
+  .chart-wrap { position: relative; height: 280px; }
+  @media (max-width: 720px) { .chart-wrap { height: 240px; } }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: right; padding: 8px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); font-weight: 650; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .pos { color: var(--green); } .neg { color: var(--red); }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  ul { padding-left: 1.2em; } li { margin: 0.35em 0; }
+  .eq { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--card2); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-size: 0.92rem; }
+  footer { color: var(--muted); font-size: 0.88rem; margin-top: 36px; border-top: 1px solid var(--line); padding-top: 16px; }
+  a { color: var(--blue); }
+  .note { font-size: 0.95rem; color: #c5d0dc; }
+  .bars { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 10px 0; }
+  .barline { display: flex; align-items: center; gap: 10px; }
+  .barline .lbl { width: 150px; flex-shrink: 0; font-size: 0.92rem; }
+  .barline .track { flex: 1; height: 18px; background: #232b36; border-radius: 9px; position: relative; overflow: hidden; }
+  .barline .fill { height: 100%; border-radius: 9px; }
+  .barline .val { width: 92px; text-align: right; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">AMZN &nbsp;·&nbsp; June 17, 2027 &nbsp;$225 call &nbsp;·&nbsp; AMZN270617C00225000</div>
+  <h1>Why Wednesday’s rally paid about 3.7×, and Thursday’s drop only cost about 2×</h1>
+  <p class="lede">The June 2027 $225 call is a long-dated, in-the-money option. Its built-in leverage is roughly <strong>delta × stock/option</strong>, or about 3.5–4×. That showed up cleanly on Wednesday, when Amazon jumped after investors re-rated AWS and the midterms. It did <em>not</em> show up symmetrically on Thursday, because implied volatility rose as the stock sold off and cushioned the call.</p>
+  <p class="note"><span class="tag obs">Observed</span> Amazon’s stock path uses Yahoo Finance 5-minute bars and official daily OHLC. <span class="tag mod">Modeled</span> The option’s minute-by-minute price, IV, and delta are reconstructed with Black-Scholes — free intraday prints for this contract were not available. Two WhaleQuant quote snapshots and a put-call parity cross-check anchor the model. Nothing modeled is presented as a recorded trade.</p>
+
+  <div class="cards">
+    <div class="card up">
+      <div class="day">Wednesday, Nov 4 · morning vs Tuesday close</div>
+      <div class="stat up">Stock +6.7%&nbsp;&nbsp;·&nbsp;&nbsp;Call +25.0%</div>
+      <div class="muted">Modeled leverage 3.73× at noon. Official full day: AMZN +6.12% to $266.03.</div>
+      <div class="statrow"><span>Tuesday close</span><span>$250.69</span></div>
+      <div class="statrow"><span>9:30 open / noon</span><span>$264.78 → $267.49</span></div>
+      <div class="statrow"><span>Morning high (~10:05)</span><span>$271.49 (+8.3%)</span></div>
+      <div class="statrow"><span>Modeled call, Tue → noon</span><span class="pos">$47.64 → $59.54</span></div>
+      <div class="statrow"><span>Modeled IV</span><span>39.76% → 38.56% <em>(crush)</em></span></div>
+      <div class="statrow"><span>Delta</span><span>0.72 → 0.79</span></div>
+    </div>
+    <div class="card down">
+      <div class="day">Thursday, Nov 5 · morning vs Wednesday close</div>
+      <div class="stat down">Stock −1.8%&nbsp;&nbsp;·&nbsp;&nbsp;Call −3.3%</div>
+      <div class="muted">Modeled leverage 1.81× at noon, 2.06× at the close (−2.2% / −4.5%). Without the IV spike the call would have fallen about 6.6% by noon and 7.9% by the close.</div>
+      <div class="statrow"><span>Wednesday close</span><span>$266.03</span></div>
+      <div class="statrow"><span>9:30 open / noon</span><span>$271.64 → $261.15</span></div>
+      <div class="statrow"><span>Morning low (~10:50)</span><span>$252.27 (−5.2%)</span></div>
+      <div class="statrow"><span>Modeled call, Wed → noon</span><span class="neg">$58.37 → $56.43</span></div>
+      <div class="statrow"><span>Modeled IV</span><span>38.56% → 41.58% noon / 42.06% at the low</span></div>
+      <div class="statrow"><span>Delta at noon</span><span>0.76</span></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h3 style="margin-top:0">Does the 6–7% / 20–25% vs 2–3% / 4–5% framing hold?</h3>
+    <p><strong>Yes, if you mark both days against the prior close</strong> — which is how an existing position would feel.</p>
+    <ul>
+      <li><strong>Wednesday:</strong> Amazon was officially +6.12% on the day and +6.70% by noon versus Tuesday’s $250.69 close. A modeled mark on the 225 call rose about <strong>22.5% by the close and 25.0% by noon</strong> (leverage 3.7×). That matches “up 20–25%, about 3.5–4×.” Most of that stock move was an overnight gap: the cash open was already $264.78, up 5.6%. From the 9:30 open to noon the stock only added another 1.0%.</li>
+      <li><strong>Thursday:</strong> Versus Wednesday’s $266.03 close, Amazon was −1.83% at noon and −2.19% at the $260.21 official close. The modeled call was <strong>−3.3% at noon and −4.5% at the close</strong> — right on “down about 4–5%.” That is <em>not</em> the whole morning, though. The stock opened <em>up</em> at $271.64, washed out to $252.27 around 10:50 (−5.2% vs Wednesday, −7.1% vs the open), then bounced. At that low the modeled call was down about 14%, still better than the 18% a constant-IV model would have printed.</li>
+    </ul>
+  </div>
+
+  <h2>Wednesday, November 4</h2>
+  <p>Investors re-rated Amazon the day after the midterms. AWS had just reported 39% growth, and the election result was read as a possible brake on new data-center buildout — which some argued would help the hyperscalers that already have capacity. Amazon closed at <strong>$266.03, up 6.12%</strong>, on very heavy volume. The VIX fell about 20% to 16.61 as election premium came out of the market.</p>
+
+  <div class="chartbox">
+    <h3>Stock price, 9:30–12:00 ET</h3>
+    <p class="caption">Observed · Yahoo Finance 5-minute closes. Dashed line is Tuesday’s official close, $250.69.</p>
+    <div class="chart-wrap"><canvas id="wedStock"></canvas></div>
+  </div>
+  <div class="chartbox">
+    <h3>Percent change vs Tuesday’s close</h3>
+    <p class="caption">Green = observed stock. Gold = modeled call (IV eases 1.2 vol points into the open, then holds). The gap is already in the first print.</p>
+    <div class="chart-wrap"><canvas id="wedPct"></canvas></div>
+  </div>
+  <div class="chartbox">
+    <h3>Modeled implied volatility and delta</h3>
+    <p class="caption">Strike IV calibrated to a Wednesday-close quote, then held flat through the session. Delta rises as the call moves deeper in the money.</p>
+    <div class="chart-wrap"><canvas id="wedGreeks"></canvas></div>
+  </div>
+
+  <div class="scroll">
+    <table id="wedTable"></table>
+  </div>
+  <p class="muted">All option columns on this page are modeled except the WhaleQuant snapshots discussed below.</p>
+
+  <h2>Thursday, November 5</h2>
+  <p>Amazon gapped up again — a Prime / Uber Eats tie-up hit the tape — then reversed as a broad tech selloff took over. Democrats’ midterm wins revived fears of tighter AI rules and pauses on data-center construction. The Nasdaq dropped about 5.5%. Amazon’s official session ran $271.43–$273.23 down to $252.27 and closed at <strong>$260.21, down 2.19%</strong>.</p>
+  <p>Volatility flipped hard the other way. The VIX jumped as much as 5.7 points to above 28 about 90 minutes after the open (around the same time Amazon printed its low) and closed at 28.18, up about 70% — its biggest one-day rise since April. Amazon’s 30-day ATM IV went from about 30% early, with the stock near $271, to 37.6% later in the day. Longer-dated IV moved less, as it should: the April 2027 ATM tenor rose about 3.2 vol points. The model gives this June 2027 225 strike a <strong>+3.5 vol-point spike at the low</strong>, with most of that increase sticking into the bounce.</p>
+
+  <div class="chartbox">
+    <h3>Stock price, 9:30–12:00 ET</h3>
+    <p class="caption">Observed · Yahoo Finance 5-minute closes. Dashed line is Wednesday’s official close, $266.03. The flush to $252.27 is the low of the 10:50 bar.</p>
+    <div class="chart-wrap"><canvas id="thuStock"></canvas></div>
+  </div>
+  <div class="chartbox">
+    <h3>Percent change vs Wednesday’s close</h3>
+    <p class="caption">Green/red = observed stock. Gold = modeled call with the IV spike. Purple dashed = same model with IV held at Wednesday’s 38.56% — the cushion is the gap between gold and purple.</p>
+    <div class="chart-wrap"><canvas id="thuPct"></canvas></div>
+  </div>
+  <div class="chartbox">
+    <h3>Modeled implied volatility and delta</h3>
+    <p class="caption">IV rises as the stock falls from the $271.64 open, peaks near the 10:50 low, and stays elevated on the bounce (70% of the peak stress is sticky).</p>
+    <div class="chart-wrap"><canvas id="thuGreeks"></canvas></div>
+  </div>
+
+  <div class="scroll">
+    <table id="thuTable"></table>
+  </div>
+
+  <h2>The math: delta leverage plus a vega offset</h2>
+  <div class="callout math">
+    <p class="eq">leverage ≈ (% call move) / (% stock move) ≈ delta × S / C</p>
+    <p>At Tuesday’s close the model has delta 0.72 on a $47.64 call with Amazon at $250.69, so 0.72 × 250.69 / 47.64 ≈ <strong>3.8×</strong>. That is the structural reason Wednesday paid about 3.5–4×. Gamma added a little extra on the way up; a modest IV crush subtracted a little.</p>
+    <p>A 1-vol-point change is worth about <strong>$0.60–$0.66</strong> of call value here (vega). A 3-point IV rise is therefore worth roughly $1.80–$2.00 — enough to cancel a large piece of a 2% downside delta hit, but not enough to cancel a 5% washout.</p>
+
+    <h3>Wednesday, Tuesday close → official close</h3>
+    <p>Stock +$15.34 (+6.12%), modeled call +$10.73 (+22.5%).</p>
+    <div class="bars">
+      <div class="barline"><div class="lbl">Delta</div><div class="track"><div class="fill" style="width:70%;background:#3dd68c"></div></div><div class="val pos">+$11.07&nbsp;(+23.2%)</div></div>
+      <div class="barline"><div class="lbl">Gamma</div><div class="track"><div class="fill" style="width:8%;background:#6cb6ff"></div></div><div class="val pos">+$0.50&nbsp;(+1.1%)</div></div>
+      <div class="barline"><div class="lbl">Vega (IV crush)</div><div class="track"><div class="fill" style="width:12%;background:#ff5c7a"></div></div><div class="val neg">−$0.79&nbsp;(−1.7%)</div></div>
+    </div>
+    <p>Same story at noon: stock +6.70%, call +25.0%, leverage 3.73×. Delta about +$12.12, gamma +$0.60, vega −$0.79.</p>
+
+    <h3>Thursday, Wednesday close → official close</h3>
+    <p>Stock −$5.82 (−2.19%), modeled call −$2.63 (−4.51%). Constant-IV counterfactual: −$4.58 (−7.85%). The IV spike saved about <strong>$1.95, or 3.3 percentage points</strong>.</p>
+    <div class="bars">
+      <div class="barline"><div class="lbl">Delta</div><div class="track"><div class="fill" style="width:62%;background:#ff5c7a"></div></div><div class="val neg">−$4.57&nbsp;(−7.8%)</div></div>
+      <div class="barline"><div class="lbl">Gamma</div><div class="track"><div class="fill" style="width:4%;background:#6cb6ff"></div></div><div class="val pos">+$0.06&nbsp;(+0.1%)</div></div>
+      <div class="barline"><div class="lbl">Vega (IV spike)</div><div class="track"><div class="fill" style="width:28%;background:#3dd68c"></div></div><div class="val pos">+$1.87&nbsp;(+3.2%)</div></div>
+    </div>
+    <p>At noon the split is similar: delta about −$3.84 (−6.6%), vega about +$1.84 (+3.1%), net −3.3% versus −6.6% with IV unchanged. At the $252.27 low, delta would have taken the call down about 18%; vega cut that to about 14%.</p>
+  </div>
+
+  <h2>Plain-English takeaway</h2>
+  <p>This call is not a 1-for-1 bet on Amazon. Because it already has a lot of intrinsic value, a dollar in the stock moves the call by about 75 cents — but that 75 cents is a much bigger <em>percentage</em> of the call premium than of the stock. That is the 3.5–4×. It works in both directions if volatility sits still.</p>
+  <p>Volatility did not sit still. Wednesday, index and single-name IV fell as the election passed; that shaved a little off the call’s gain but the delta/gamma from a 6% gap-up still delivered a roughly 23–25% rise. Thursday, IV jumped as tech sold off. The extra premium from that spike replaced a large share of what delta was taking away, so a 2% decline in Amazon only showed up as a 4–5% decline in the call — as long as you mark it to the prior close and not to the $252 washout.</p>
+  <p>The asymmetry is not magic and it is not guaranteed. It is vega. If IV had not risen Thursday, the same 2.2% stock drop would have been about an 8% hit on the call, much closer to the 3.6× starting leverage.</p>
+
+  <h2>Sources and methodology</h2>
+  <p><strong>Stock (observed).</strong> Intraday path from Yahoo Finance 5-minute bars (<code>query1.finance.yahoo.com/v8/finance/chart/AMZN?interval=5m&amp;range=5d</code>), regular session, America/New_York. Official daily figures: November 3 close $250.69 (implied by the published +$15.34 / +6.12% on November 4); November 4 open/high/low/close $264.82 / $271.49 / $263.85 / $266.03; November 5 $271.43 / $273.23 / $252.27 / $260.21. Yahoo’s 5-minute open on November 4 was $264.78 and on November 5 was $271.64 — a few cents off the official prints, used consistently for the charts.</p>
+  <p><strong>Why the stock moved.</strong> November 4: reassessment of October 29 earnings (AWS +39.3% to a $184B run rate, Jassy projecting &gt;40% AWS growth in 2027–28) plus the midterm result, which some investors read as friendly to incumbent hyperscalers. November 5: an early pop (including an Amazon–Uber Eats Prime tie-up) faded into a tech liquidation on AI-regulation and data-center permit fears; Qualcomm and Arm results overnight added pressure. Sources include Amazon IR, Motley Fool session recaps, Reuters, NBC News, Benzinga, and Yahoo Finance.</p>
+  <p><strong>Option quotes (observed, timestamps uncertain).</strong> WhaleQuant’s June 17, 2027 chain: an earlier cached snapshot showed the 225 call last $58.89, bid $57.05 / ask $59.70 (mid $58.38), volume 63, open interest 3,044, listed IV 46.48%. A live fetch on the evening of November 5 showed last $51.70, bid $48.70 / ask $51.20 (mid $49.95), volume 4, open interest 3,021, listed IV 43.13%, with the 225 put bid $14.10 / ask $15.00 (mid $14.55, listed IV 37.69%). The later call market is wide and almost untraded; put-call parity at the $260.21 close with that put mid implies a call closer to <strong>$55.62</strong>, which matches the model’s $55.74 close within 15 cents. Nasdaq’s public chain page was unavailable. A search of X for contemporaneous prints of AMZN270617C00225000 did not turn up usable quotes.</p>
+  <p><strong>Implied volatility context (observed).</strong> June 17, 2027 ATM IV about 34.9% (Options Analysis Suite, 225 DTE). ApexVol: AMZN 30-day IV 29.9% as of November 4. OptiView: 33.0% as of November 4, 3:55 p.m. ET. OptionScout: about 30% 30-day IV on November 5 with AMZN near $271. Options Band: 37.6% 30-day IV as of November 5, 21:49 UTC, with the November 6 expiry at 64.1% (from 44.5%) and April 16, 2027 ATM IV at 36.9% versus 33.7% on the earlier term-structure snapshot (about +3.2 points for that tenor). VIX 16.61 on November 4 (Saxo; Exa) and 28.18 on November 5; CNBC reported a jump of as much as 5.7 points to above 28 about 90 minutes after Thursday’s open, and an intraday range of more than 11 points.</p>
+  <p><strong>Model (clearly labeled).</strong> European Black-Scholes, strike 225, expiration treated as 4:00 p.m. ET on June 17, 2027, dividend yield 0 (as specified), continuous risk-free rate 4.3% (near the 52-week T-bill coupon equivalent: 4.39% on November 4 and 4.28% on November 5, U.S. Treasury). Wednesday close mid $58.38 at $266.03 backs out a strike IV of 38.56% — a few points above the 34.9% ATM reading, which is reasonable for this in-the-money strike. Tuesday’s close is modeled at 39.76% (1.2 vol points higher) to reflect Wednesday’s market-wide vol crush. Thursday IV starts at 38.56% and rises 3.5 vol points at the $252.27 low, tracking drawdown from the $271.64 open, with 70% of peak stress kept on the bounce (noon 41.58%, close 41.63%). That +3.5-point LEAPS move is an assumption guided by the +3.2-point rise in nearby long-dated ATM IV and the much larger front-end spike; it is not a recorded IV print on this contract. A constant-38.56% path is plotted next to it so the vega cushion is visible.</p>
+
+  <footer>
+    <p>Educational illustration only. Not financial advice, not a recommendation to buy or sell any security or option, and not a substitute for live broker quotes. Modeled prices can differ from actual fills, especially on a long-dated contract that printed as few as four contracts. Times are America/New_York (ET). Page generated the evening of November 5, 2026.</p>
+    <p>Repo: <a href="https://github.com/vivek737/amzn-options-analysis">github.com/vivek737/amzn-options-analysis</a></p>
+  </footer>
+</div>
+<script>
+const DATA = {"wed":[{"t":"09:30","S":266.54,"Sh":269.97,"Sl":263.85,"So":264.78,"C":58.794,"Cconst":58.794,"iv":38.56,"delta":0.788,"vega":0.607,"gamma":0.0036,"Spct":6.323,"Cpct":23.415,"Cconstpct":23.415,"lev":3.7},{"t":"09:35","S":268.64,"Sh":269.75,"Sl":266.3,"So":266.54,"C":60.456,"Cconst":60.456,"iv":38.56,"delta":0.795,"vega":0.599,"gamma":0.0035,"Spct":7.16,"Cpct":26.903,"Cconstpct":26.903,"lev":3.76},{"t":"09:40","S":269.165,"Sh":269.28,"Sl":267.48,"So":268.62,"C":60.873,"Cconst":60.873,"iv":38.56,"delta":0.797,"vega":0.597,"gamma":0.0035,"Spct":7.37,"Cpct":27.78,"Cconstpct":27.78,"lev":3.77},{"t":"09:45","S":268.71,"Sh":269.23,"Sl":268.2,"So":269.165,"C":60.511,"Cconst":60.511,"iv":38.56,"delta":0.795,"vega":0.599,"gamma":0.0035,"Spct":7.188,"Cpct":27.019,"Cconstpct":27.019,"lev":3.76},{"t":"09:50","S":269.24,"Sh":270.53,"Sl":268.29,"So":268.73,"C":60.933,"Cconst":60.933,"iv":38.56,"delta":0.797,"vega":0.597,"gamma":0.0035,"Spct":7.4,"Cpct":27.904,"Cconstpct":27.904,"lev":3.77},{"t":"09:55","S":270.37,"Sh":270.76,"Sl":268.91,"So":269.3,"C":61.835,"Cconst":61.835,"iv":38.56,"delta":0.801,"vega":0.593,"gamma":0.0034,"Spct":7.85,"Cpct":29.799,"Cconstpct":29.799,"lev":3.8},{"t":"10:00","S":271.135,"Sh":271.455,"Sl":270.075,"So":270.44,"C":62.449,"Cconst":62.449,"iv":38.56,"delta":0.804,"vega":0.59,"gamma":0.0034,"Spct":8.155,"Cpct":31.087,"Cconstpct":31.087,"lev":3.81},{"t":"10:05","S":270.27,"Sh":271.49,"Sl":270.01,"So":271.15,"C":61.755,"Cconst":61.755,"iv":38.56,"delta":0.801,"vega":0.593,"gamma":0.0034,"Spct":7.81,"Cpct":29.63,"Cconstpct":29.63,"lev":3.79},{"t":"10:10","S":270.13,"Sh":270.65,"Sl":269.33,"So":270.275,"C":61.642,"Cconst":61.642,"iv":38.56,"delta":0.8,"vega":0.594,"gamma":0.0034,"Spct":7.755,"Cpct":29.394,"Cconstpct":29.394,"lev":3.79},{"t":"10:15","S":268.955,"Sh":270.58,"Sl":268.9,"So":270.13,"C":60.704,"Cconst":60.704,"iv":38.56,"delta":0.796,"vega":0.598,"gamma":0.0035,"Spct":7.286,"Cpct":27.425,"Cconstpct":27.425,"lev":3.76},{"t":"10:20","S":269.48,"Sh":269.59,"Sl":268.39,"So":268.955,"C":61.123,"Cconst":61.123,"iv":38.56,"delta":0.798,"vega":0.596,"gamma":0.0035,"Spct":7.495,"Cpct":28.303,"Cconstpct":28.303,"lev":3.78},{"t":"10:25","S":269.065,"Sh":269.51,"Sl":268.31,"So":269.47,"C":60.791,"Cconst":60.791,"iv":38.56,"delta":0.797,"vega":0.598,"gamma":0.0035,"Spct":7.33,"Cpct":27.608,"Cconstpct":27.608,"lev":3.77},{"t":"10:30","S":268.08,"Sh":269.38,"Sl":268.0,"So":269.05,"C":60.008,"Cconst":60.008,"iv":38.56,"delta":0.793,"vega":0.602,"gamma":0.0035,"Spct":6.937,"Cpct":25.964,"Cconstpct":25.964,"lev":3.74},{"t":"10:35","S":267.625,"Sh":268.58,"Sl":267.59,"So":268.1,"C":59.647,"Cconst":59.647,"iv":38.56,"delta":0.792,"vega":0.603,"gamma":0.0035,"Spct":6.755,"Cpct":25.207,"Cconstpct":25.207,"lev":3.73},{"t":"10:40","S":267.375,"Sh":268.19,"Sl":267.22,"So":267.635,"C":59.449,"Cconst":59.449,"iv":38.56,"delta":0.791,"vega":0.604,"gamma":0.0036,"Spct":6.656,"Cpct":24.791,"Cconstpct":24.791,"lev":3.72},{"t":"10:45","S":267.57,"Sh":268.05,"Sl":267.28,"So":267.375,"C":59.603,"Cconst":59.603,"iv":38.56,"delta":0.791,"vega":0.603,"gamma":0.0035,"Spct":6.733,"Cpct":25.114,"Cconstpct":25.114,"lev":3.73},{"t":"10:50","S":267.485,"Sh":267.765,"Sl":267.0,"So":267.57,"C":59.536,"Cconst":59.536,"iv":38.56,"delta":0.791,"vega":0.604,"gamma":0.0035,"Spct":6.7,"Cpct":24.972,"Cconstpct":24.972,"lev":3.73},{"t":"10:55","S":266.7,"Sh":267.79,"Sl":266.7,"So":267.5,"C":58.916,"Cconst":58.916,"iv":38.56,"delta":0.788,"vega":0.607,"gamma":0.0036,"Spct":6.386,"Cpct":23.671,"Cconstpct":23.671,"lev":3.71},{"t":"11:00","S":266.89,"Sh":267.48,"Sl":266.61,"So":267.174,"C":59.065,"Cconst":59.065,"iv":38.56,"delta":0.789,"vega":0.606,"gamma":0.0036,"Spct":6.462,"Cpct":23.985,"Cconstpct":23.985,"lev":3.71},{"t":"11:05","S":266.62,"Sh":266.895,"Sl":265.85,"So":266.89,"C":58.852,"Cconst":58.852,"iv":38.56,"delta":0.788,"vega":0.607,"gamma":0.0036,"Spct":6.354,"Cpct":23.537,"Cconstpct":23.537,"lev":3.7},{"t":"11:10","S":266.66,"Sh":267.3,"Sl":266.2,"So":266.6,"C":58.884,"Cconst":58.884,"iv":38.56,"delta":0.788,"vega":0.607,"gamma":0.0036,"Spct":6.37,"Cpct":23.603,"Cconstpct":23.603,"lev":3.71},{"t":"11:15","S":266.76,"Sh":266.88,"Sl":266.28,"So":266.66,"C":58.962,"Cconst":58.962,"iv":38.56,"delta":0.788,"vega":0.606,"gamma":0.0036,"Spct":6.41,"Cpct":23.768,"Cconstpct":23.768,"lev":3.71},{"t":"11:20","S":266.14,"Sh":266.78,"Sl":265.825,"So":266.76,"C":58.474,"Cconst":58.474,"iv":38.56,"delta":0.786,"vega":0.609,"gamma":0.0036,"Spct":6.163,"Cpct":22.743,"Cconstpct":22.743,"lev":3.69},{"t":"11:25","S":265.345,"Sh":266.2,"Sl":265.23,"So":266.16,"C":57.85,"Cconst":57.85,"iv":38.56,"delta":0.783,"vega":0.612,"gamma":0.0037,"Spct":5.846,"Cpct":21.433,"Cconstpct":21.433,"lev":3.67},{"t":"11:30","S":266.1,"Sh":266.15,"Sl":265.28,"So":265.37,"C":58.442,"Cconst":58.442,"iv":38.56,"delta":0.786,"vega":0.609,"gamma":0.0036,"Spct":6.147,"Cpct":22.676,"Cconstpct":22.676,"lev":3.69},{"t":"11:35","S":266.216,"Sh":266.34,"Sl":265.64,"So":266.065,"C":58.533,"Cconst":58.533,"iv":38.56,"delta":0.787,"vega":0.608,"gamma":0.0036,"Spct":6.193,"Cpct":22.867,"Cconstpct":22.867,"lev":3.69},{"t":"11:40","S":267.2,"Sh":267.235,"Sl":266.105,"So":266.24,"C":59.308,"Cconst":59.308,"iv":38.56,"delta":0.79,"vega":0.605,"gamma":0.0036,"Spct":6.586,"Cpct":24.494,"Cconstpct":24.494,"lev":3.72},{"t":"11:45","S":268.035,"Sh":268.16,"Sl":267.08,"So":267.18,"C":59.969,"Cconst":59.969,"iv":38.56,"delta":0.793,"vega":0.602,"gamma":0.0035,"Spct":6.919,"Cpct":25.881,"Cconstpct":25.881,"lev":3.74},{"t":"11:50","S":268.325,"Sh":268.5,"Sl":267.79,"So":268.035,"C":60.199,"Cconst":60.199,"iv":38.56,"delta":0.794,"vega":0.6,"gamma":0.0035,"Spct":7.035,"Cpct":26.364,"Cconstpct":26.364,"lev":3.75},{"t":"11:55","S":268.16,"Sh":268.59,"Sl":268.08,"So":268.325,"C":60.068,"Cconst":60.068,"iv":38.56,"delta":0.793,"vega":0.601,"gamma":0.0035,"Spct":6.969,"Cpct":26.088,"Cconstpct":26.088,"lev":3.74},{"t":"12:00","S":267.49,"Sh":268.21,"Sl":267.19,"So":268.14,"C":59.536,"Cconst":59.536,"iv":38.56,"delta":0.791,"vega":0.604,"gamma":0.0035,"Spct":6.701,"Cpct":24.974,"Cconstpct":24.974,"lev":3.73}],"thu":[{"t":"09:30","S":270.818,"Sh":273.23,"Sl":269.05,"So":271.64,"C":62.347,"Cconst":62.127,"iv":38.93,"delta":0.801,"vega":0.592,"gamma":0.0034,"Spct":1.8,"Cpct":6.806,"Cconstpct":6.429,"lev":3.78},{"t":"09:35","S":269.655,"Sh":271.541,"Sl":269.45,"So":270.08,"C":61.454,"Cconst":61.195,"iv":39.0,"delta":0.797,"vega":0.597,"gamma":0.0034,"Spct":1.363,"Cpct":5.277,"Cconstpct":4.834,"lev":3.87},{"t":"09:40","S":266.275,"Sh":269.737,"Sl":266.23,"So":269.655,"C":59.109,"Cconst":58.515,"iv":39.54,"delta":0.783,"vega":0.612,"gamma":0.0036,"Spct":0.092,"Cpct":1.26,"Cconstpct":0.242,"lev":13.68},{"t":"09:45","S":265.15,"Sh":266.8,"Sl":265.02,"So":266.3,"C":58.362,"Cconst":57.632,"iv":39.75,"delta":0.779,"vega":0.618,"gamma":0.0036,"Spct":-0.331,"Cpct":-0.02,"Cconstpct":-1.271,"lev":0.06},{"t":"09:50","S":264.04,"Sh":266.106,"Sl":263.89,"So":265.1,"C":57.626,"Cconst":56.765,"iv":39.95,"delta":0.774,"vega":0.622,"gamma":0.0036,"Spct":-0.748,"Cpct":-1.281,"Cconstpct":-2.756,"lev":1.71},{"t":"09:55","S":263.06,"Sh":264.1,"Sl":262.41,"So":264.09,"C":57.02,"Cconst":56.003,"iv":40.19,"delta":0.77,"vega":0.627,"gamma":0.0037,"Spct":-1.116,"Cpct":-2.32,"Cconstpct":-4.061,"lev":2.08},{"t":"10:00","S":261.225,"Sh":263.3,"Sl":260.9,"So":263.04,"C":55.797,"Cconst":54.587,"iv":40.48,"delta":0.762,"vega":0.634,"gamma":0.0037,"Spct":-1.806,"Cpct":-4.414,"Cconstpct":-6.487,"lev":2.44},{"t":"10:05","S":259.91,"Sh":261.28,"Sl":259.52,"So":261.253,"C":54.955,"Cconst":53.58,"iv":40.73,"delta":0.756,"vega":0.639,"gamma":0.0038,"Spct":-2.3,"Cpct":-5.856,"Cconstpct":-8.212,"lev":2.55},{"t":"10:10","S":259.21,"Sh":260.32,"Sl":259.17,"So":259.89,"C":54.479,"Cconst":53.047,"iv":40.81,"delta":0.753,"vega":0.641,"gamma":0.0038,"Spct":-2.564,"Cpct":-6.671,"Cconstpct":-9.125,"lev":2.6},{"t":"10:15","S":257.5,"Sh":259.72,"Sl":257.45,"So":259.28,"C":53.397,"Cconst":51.753,"iv":41.12,"delta":0.746,"vega":0.647,"gamma":0.0039,"Spct":-3.206,"Cpct":-8.526,"Cconstpct":-11.343,"lev":2.66},{"t":"10:20","S":257.375,"Sh":257.94,"Sl":256.8,"So":257.5,"C":53.361,"Cconst":51.658,"iv":41.21,"delta":0.745,"vega":0.648,"gamma":0.0039,"Spct":-3.253,"Cpct":-8.587,"Cconstpct":-11.504,"lev":2.64},{"t":"10:25","S":256.16,"Sh":257.35,"Sl":255.915,"So":257.35,"C":52.574,"Cconst":50.746,"iv":41.39,"delta":0.74,"vega":0.651,"gamma":0.0039,"Spct":-3.71,"Cpct":-9.935,"Cconstpct":-13.066,"lev":2.68},{"t":"10:30","S":257.55,"Sh":258.15,"Sl":256.05,"So":256.16,"C":53.557,"Cconst":51.789,"iv":41.31,"delta":0.746,"vega":0.647,"gamma":0.0038,"Spct":-3.188,"Cpct":-8.251,"Cconstpct":-11.279,"lev":2.59},{"t":"10:35","S":256.85,"Sh":258.08,"Sl":256.58,"So":257.51,"C":53.061,"Cconst":51.263,"iv":41.35,"delta":0.743,"vega":0.649,"gamma":0.0039,"Spct":-3.451,"Cpct":-9.102,"Cconstpct":-12.182,"lev":2.64},{"t":"10:40","S":256.795,"Sh":257.21,"Sl":256.2,"So":256.85,"C":53.022,"Cconst":51.221,"iv":41.35,"delta":0.743,"vega":0.649,"gamma":0.0039,"Spct":-3.471,"Cpct":-9.169,"Cconstpct":-12.253,"lev":2.64},{"t":"10:45","S":254.57,"Sh":256.81,"Sl":254.522,"So":256.77,"C":51.573,"Cconst":49.561,"iv":41.65,"delta":0.733,"vega":0.656,"gamma":0.004,"Spct":-4.308,"Cpct":-11.65,"Cconstpct":-15.096,"lev":2.7},{"t":"10:50","S":253.105,"Sh":254.61,"Sl":252.27,"So":254.57,"C":50.743,"Cconst":48.48,"iv":42.01,"delta":0.727,"vega":0.66,"gamma":0.004,"Spct":-4.858,"Cpct":-13.071,"Cconstpct":-16.949,"lev":2.69},{"t":"10:55","S":254.788,"Sh":255.18,"Sl":252.87,"So":253.1,"C":51.912,"Cconst":49.723,"iv":41.92,"delta":0.733,"vega":0.656,"gamma":0.0039,"Spct":-4.226,"Cpct":-11.07,"Cconstpct":-14.82,"lev":2.62},{"t":"11:00","S":254.675,"Sh":255.685,"Sl":254.42,"So":254.58,"C":51.833,"Cconst":49.639,"iv":41.93,"delta":0.733,"vega":0.656,"gamma":0.0039,"Spct":-4.268,"Cpct":-11.206,"Cconstpct":-14.964,"lev":2.63},{"t":"11:05","S":255.845,"Sh":255.94,"Sl":254.18,"So":254.67,"C":52.651,"Cconst":50.509,"iv":41.87,"delta":0.738,"vega":0.653,"gamma":0.0039,"Spct":-3.829,"Cpct":-9.803,"Cconstpct":-13.473,"lev":2.56},{"t":"11:10","S":257.8,"Sh":257.8,"Sl":255.75,"So":255.84,"C":54.031,"Cconst":51.976,"iv":41.76,"delta":0.745,"vega":0.648,"gamma":0.0038,"Spct":-3.094,"Cpct":-7.439,"Cconstpct":-10.96,"lev":2.4},{"t":"11:15","S":258.28,"Sh":258.79,"Sl":257.37,"So":257.643,"C":54.373,"Cconst":52.338,"iv":41.73,"delta":0.747,"vega":0.647,"gamma":0.0038,"Spct":-2.913,"Cpct":-6.854,"Cconstpct":-10.339,"lev":2.35},{"t":"11:20","S":259.35,"Sh":259.4,"Sl":258.27,"So":258.31,"C":55.137,"Cconst":53.15,"iv":41.68,"delta":0.751,"vega":0.644,"gamma":0.0037,"Spct":-2.511,"Cpct":-5.545,"Cconstpct":-8.949,"lev":2.21},{"t":"11:25","S":260.0,"Sh":260.18,"Sl":259.18,"So":259.34,"C":55.603,"Cconst":53.645,"iv":41.64,"delta":0.754,"vega":0.642,"gamma":0.0037,"Spct":-2.267,"Cpct":-4.746,"Cconstpct":-8.101,"lev":2.09},{"t":"11:30","S":259.36,"Sh":260.12,"Sl":258.635,"So":260.04,"C":55.143,"Cconst":53.157,"iv":41.68,"delta":0.752,"vega":0.644,"gamma":0.0037,"Spct":-2.507,"Cpct":-5.534,"Cconstpct":-8.937,"lev":2.21},{"t":"11:35","S":260.28,"Sh":260.75,"Sl":259.3,"So":259.32,"C":55.804,"Cconst":53.858,"iv":41.63,"delta":0.755,"vega":0.641,"gamma":0.0037,"Spct":-2.161,"Cpct":-4.402,"Cconstpct":-7.735,"lev":2.04},{"t":"11:40","S":261.21,"Sh":261.46,"Sl":260.01,"So":260.28,"C":56.476,"Cconst":54.571,"iv":41.58,"delta":0.759,"vega":0.638,"gamma":0.0037,"Spct":-1.812,"Cpct":-3.252,"Cconstpct":-6.515,"lev":1.79},{"t":"11:45","S":261.41,"Sh":262.3,"Sl":260.52,"So":261.27,"C":56.62,"Cconst":54.724,"iv":41.56,"delta":0.759,"vega":0.638,"gamma":0.0037,"Spct":-1.737,"Cpct":-3.004,"Cconstpct":-6.252,"lev":1.73},{"t":"11:50","S":262.025,"Sh":262.2,"Sl":260.752,"So":261.37,"C":57.066,"Cconst":55.197,"iv":41.53,"delta":0.762,"vega":0.636,"gamma":0.0036,"Spct":-1.505,"Cpct":-2.239,"Cconstpct":-5.441,"lev":1.49},{"t":"11:55","S":262.18,"Sh":262.55,"Sl":261.52,"So":261.99,"C":57.179,"Cconst":55.317,"iv":41.52,"delta":0.762,"vega":0.635,"gamma":0.0036,"Spct":-1.447,"Cpct":-2.047,"Cconstpct":-5.237,"lev":1.41},{"t":"12:00","S":261.15,"Sh":262.14,"Sl":260.84,"So":262.14,"C":56.431,"Cconst":54.524,"iv":41.58,"delta":0.758,"vega":0.639,"gamma":0.0037,"Spct":-1.834,"Cpct":-3.328,"Cconstpct":-6.596,"lev":1.81}],"wed_table":[{"label":"Tue close (ref)","t":"16:00","S":250.69,"C":47.639,"Cconst":46.846,"iv":39.76,"delta":0.721,"vega":0.662,"gamma":0.0043,"Spct":0.0,"Cpct":0.0,"Cconstpct":-1.66,"lev":null},{"label":"Wed 9:30 open","t":"09:30","S":264.78,"C":57.413,"Cconst":57.413,"iv":38.56,"delta":0.781,"vega":0.614,"gamma":0.0037,"Spct":5.62,"Cpct":20.52,"Cconstpct":20.52,"lev":3.65},{"label":"Wed ~10:05 high","t":"10:05","S":271.49,"C":62.734,"Cconst":62.734,"iv":38.56,"delta":0.805,"vega":0.588,"gamma":0.0034,"Spct":8.3,"Cpct":31.69,"Cconstpct":31.69,"lev":3.82},{"label":"Wed 12:00","t":"12:00","S":267.49,"C":59.536,"Cconst":59.536,"iv":38.56,"delta":0.791,"vega":0.604,"gamma":0.0035,"Spct":6.7,"Cpct":24.97,"Cconstpct":24.97,"lev":3.73},{"label":"Wed close","t":"16:00","S":266.03,"C":58.374,"Cconst":58.374,"iv":38.56,"delta":0.786,"vega":0.609,"gamma":0.0036,"Spct":6.12,"Cpct":22.53,"Cconstpct":22.53,"lev":3.68}],"thu_table":[{"label":"Wed close (ref)","t":"16:00","S":266.03,"C":58.374,"Cconst":58.374,"iv":38.56,"delta":0.786,"vega":0.609,"gamma":0.0036,"Spct":0.0,"Cpct":0.0,"Cconstpct":0.0,"lev":null},{"label":"Thu 9:30 open","t":"09:30","S":271.64,"C":62.788,"Cconst":62.788,"iv":38.56,"delta":0.806,"vega":0.586,"gamma":0.0034,"Spct":2.11,"Cpct":7.56,"Cconstpct":7.56,"lev":3.59},{"label":"Thu 9:30 high","t":"09:30","S":273.23,"C":64.073,"Cconst":64.073,"iv":38.56,"delta":0.811,"vega":0.58,"gamma":0.0033,"Spct":2.71,"Cpct":9.76,"Cconstpct":9.76,"lev":3.61},{"label":"Thu 10:00","t":"10:00","S":261.225,"C":55.797,"Cconst":54.587,"iv":40.48,"delta":0.762,"vega":0.634,"gamma":0.0037,"Spct":-1.81,"Cpct":-4.41,"Cconstpct":-6.49,"lev":2.44},{"label":"Thu 10:15","t":"10:15","S":257.5,"C":53.397,"Cconst":51.753,"iv":41.12,"delta":0.746,"vega":0.647,"gamma":0.0039,"Spct":-3.21,"Cpct":-8.53,"Cconstpct":-11.34,"lev":2.66},{"label":"Thu ~10:50 low","t":"10:50","S":252.27,"C":50.168,"Cconst":47.868,"iv":42.06,"delta":0.723,"vega":0.662,"gamma":0.004,"Spct":-5.17,"Cpct":-14.06,"Cconstpct":-18.0,"lev":2.72},{"label":"Thu 12:00","t":"12:00","S":261.15,"C":56.431,"Cconst":54.524,"iv":41.58,"delta":0.758,"vega":0.639,"gamma":0.0037,"Spct":-1.83,"Cpct":-3.33,"Cconstpct":-6.6,"lev":1.81},{"label":"Thu close","t":"16:00","S":260.21,"C":55.74,"Cconst":53.792,"iv":41.63,"delta":0.755,"vega":0.641,"gamma":0.0037,"Spct":-2.19,"Cpct":-4.51,"Cconstpct":-7.85,"lev":2.06}],"meta":{"generated":"November 5, 2026, evening ET","C_tue":47.639,"d_tue":0.721,"v_tue":0.662,"g_tue":0.0043,"C_wed":58.374,"d_wed":0.786,"v_wed":0.609,"g_wed":0.0036,"C_thu":55.74,"iv_tue":39.76,"iv_wed":38.56,"iv_noon":41.58,"iv_low":42.06,"iv_close":41.63,"snap_a_iv":38.56,"parity_C":55.62,"parity_iv":41.44,"wed_open_S":264.78,"wed_noon_S":267.49,"thu_open_S":271.64,"thu_noon_S":261.15,"thu_low_S":252.27,"thu_low_t":"10:50"},"official":{"2026-11-03":{"c":250.69},"2026-11-04":{"o":264.82,"h":271.49,"l":263.85,"c":266.03,"chg":15.34,"chgp":6.12},"2026-11-05":{"o":271.43,"h":273.23,"l":252.27,"c":260.21,"chg":-5.82,"chgp":-2.19}},"decomp":{"wed_noon":{"dS":16.8,"dC":11.897,"delta":12.12,"gamma":0.604,"vega":-0.795,"sum":11.929,"delta_pct":25.441,"gamma_pct":1.268,"vega_pct":-1.668,"dC_pct":24.973},"wed_close":{"dS":15.34,"dC":10.735,"delta":11.067,"gamma":0.504,"vega":-0.795,"sum":10.776,"delta_pct":23.23,"gamma_pct":1.057,"vega_pct":-1.668,"dC_pct":22.533},"thu_noon":{"dS":-4.88,"dC":-1.943,"delta":-3.835,"gamma":0.043,"vega":1.838,"sum":-1.954,"delta_pct":-6.57,"gamma_pct":0.074,"vega_pct":3.148,"dC_pct":-3.328},"thu_low":{"dS":-13.76,"dC":-8.206,"delta":-10.814,"gamma":0.343,"vega":2.131,"sum":-8.34,"delta_pct":-18.525,"gamma_pct":0.587,"vega_pct":3.65,"dC_pct":-14.057},"thu_close":{"dS":-5.82,"dC":-2.634,"delta":-4.574,"gamma":0.061,"vega":1.869,"sum":-2.644,"delta_pct":-7.835,"gamma_pct":0.105,"vega_pct":3.202,"dC_pct":-4.512}}};
+
+function money(n){ return (n<0?"−":"") + "$" + Math.abs(n).toFixed(2); }
+function pct(n){ const s = (n<0?"−":"+") + Math.abs(n).toFixed(2) + "%"; return s; }
+function cls(n){ return n>0.005 ? "pos" : (n<-0.005 ? "neg" : ""); }
+
+function renderTable(id, rows){
+  const el = document.getElementById(id);
+  el.innerHTML = `<thead><tr>
+    <th>Time (ET)</th><th>Stock</th><th>Stock vs ref</th>
+    <th>Call (modeled)</th><th>Call vs ref</th><th>Const-IV call</th>
+    <th>IV</th><th>Delta</th><th>Leverage</th>
+  </tr></thead>` + rows.map(r => `<tr>
+    <td>${r.label}</td>
+    <td>${money(r.S)}</td>
+    <td class="${cls(r.Spct)}">${r.Spct===0?"ref":pct(r.Spct)}</td>
+    <td>${money(r.C)}</td>
+    <td class="${cls(r.Cpct)}">${r.Cpct===0?"ref":pct(r.Cpct)}</td>
+    <td>${money(r.Cconst)} <span class="muted">(${r.Cconstpct===0?"ref":pct(r.Cconstpct)})</span></td>
+    <td>${r.iv.toFixed(2)}%</td>
+    <td>${r.delta.toFixed(2)}</td>
+    <td>${r.lev==null?"—":r.lev.toFixed(2)+"×"}</td>
+  </tr>`).join("");
+}
+renderTable("wedTable", DATA.wed_table);
+renderTable("thuTable", DATA.thu_table);
+
+const tick = { color: "#9aa7b8", font: { size: 13 } };
+const grid = { color: "rgba(255,255,255,0.06)" };
+Chart.defaults.color = "#9aa7b8";
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif";
+Chart.defaults.font.size = 14;
+
+function lineChart(canvas, labels, datasets, opts={}){
+  const y1 = opts.y1;
+  return new Chart(document.getElementById(canvas), {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { labels: { color: "#e8eef6", boxWidth: 14, padding: 14, font: { size: 13 } } },
+        tooltip: { backgroundColor: "#0b0f14", titleColor: "#e8eef6", bodyColor: "#e8eef6", borderColor: "#2a3340", borderWidth: 1 }
+      },
+      scales: {
+        x: { ticks: tick, grid },
+        y: Object.assign({ ticks: tick, grid, title: { display: !!opts.yTitle, text: opts.yTitle||"", color: "#9aa7b8" } }, opts.y||{}),
+        ...(y1 ? { y1: Object.assign({ ticks: tick, grid: { drawOnChartArea: false }, position: "right" }, y1) } : {})
+      }
+    }
+  });
+}
+const ds = (label, data, color, extra={}) => Object.assign({
+  label, data, borderColor: color, backgroundColor: color, pointRadius: 0,
+  borderWidth: 2.5, tension: 0.15
+}, extra);
+
+const w = DATA.wed, t = DATA.thu;
+const wL = w.map(x => x.t), tL = t.map(x => x.t);
+
+lineChart("wedStock", wL, [
+  ds("AMZN (observed)", w.map(x => x.S), "#3dd68c", { pointRadius: 2, pointHoverRadius: 5 }),
+  ds("Tue close $250.69", w.map(() => 250.69), "#9aa7b8", { borderDash: [6,5], borderWidth: 1.5, pointRadius: 0 })
+], { yTitle: "USD" });
+
+lineChart("wedPct", wL, [
+  ds("Stock % vs Tue close", w.map(x => x.Spct), "#3dd68c", { pointRadius: 2 }),
+  ds("Call % vs Tue close (modeled)", w.map(x => x.Cpct), "#f5c14a", { pointRadius: 2 })
+], { yTitle: "% change" });
+
+lineChart("wedGreeks", wL, [
+  ds("IV % (modeled)", w.map(x => x.iv), "#c5a3ff", { yAxisID: "y" }),
+  ds("Delta (modeled)", w.map(x => x.delta), "#6cb6ff", { yAxisID: "y1" })
+], { yTitle: "IV %", y: { min: 36, max: 42 }, y1: { title: { display: true, text: "Delta", color: "#9aa7b8" }, min: 0.7, max: 0.86 } });
+
+lineChart("thuStock", tL, [
+  ds("AMZN (observed)", t.map(x => x.S), "#ff5c7a", { pointRadius: 2, pointHoverRadius: 5 }),
+  ds("Wed close $266.03", t.map(() => 266.03), "#9aa7b8", { borderDash: [6,5], borderWidth: 1.5, pointRadius: 0 })
+], { yTitle: "USD" });
+
+lineChart("thuPct", tL, [
+  ds("Stock % vs Wed close", t.map(x => x.Spct), "#e8eef6", { pointRadius: 2 }),
+  ds("Call % with IV spike (modeled)", t.map(x => x.Cpct), "#f5c14a", { pointRadius: 2 }),
+  ds("Call % if IV had stayed at 38.56%", t.map(x => x.Cconstpct), "#c5a3ff", { borderDash: [6,4], borderWidth: 2, pointRadius: 0 })
+], { yTitle: "% change" });
+
+lineChart("thuGreeks", tL, [
+  ds("IV % (modeled)", t.map(x => x.iv), "#c5a3ff", { yAxisID: "y" }),
+  ds("Delta (modeled)", t.map(x => x.delta), "#6cb6ff", { yAxisID: "y1" })
+], { yTitle: "IV %", y: { min: 37, max: 44 }, y1: { title: { display: true, text: "Delta", color: "#9aa7b8" }, min: 0.70, max: 0.86 } });
+</script>
+</body>
+</html>
